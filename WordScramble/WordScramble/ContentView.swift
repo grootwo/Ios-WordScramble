@@ -51,6 +51,10 @@ struct ContentView: View {
         }
         fatalError("Could not load start.txt from bundle.")
     }
+    func isOriginal(word: String) -> Bool {
+        !usedWords.contains(word)
+    }
+    
 }
 
 #Preview {
