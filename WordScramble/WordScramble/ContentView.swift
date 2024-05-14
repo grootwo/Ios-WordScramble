@@ -35,7 +35,9 @@ struct ContentView: View {
     func addWord() {
         let word = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         guard word.count > 0 else { return }
-        usedWords.insert(word, at: 0)
+        withAnimation {
+            usedWords.insert(word, at: 0)
+        }
         newWord = ""
     }
 }
