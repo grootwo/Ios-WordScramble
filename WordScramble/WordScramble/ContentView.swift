@@ -16,6 +16,7 @@ struct ContentView: View {
             List {
                 Section {
                     TextField("Enter your word", text: $newWord)
+                        .textInputAutocapitalization(.never)
                 }
                 Section {
                     ForEach(usedWords, id: \.self) { word in
