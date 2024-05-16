@@ -14,12 +14,16 @@ struct ContentView: View {
     @State private var errorTitle = ""
     @State private var errorMessage = ""
     @State private var showingAlert = false
+    @State private var score = 0
     var body: some View {
         NavigationStack {
             List {
                 Section {
                     TextField("Enter your word", text: $newWord)
                         .textInputAutocapitalization(.never)
+                }
+                Section("Your score") {
+                    Text(score, format: .number)
                 }
                 Section {
                     ForEach(usedWords, id: \.self) { word in
@@ -71,10 +75,13 @@ struct ContentView: View {
         }
         withAnimation {
             usedWords.insert(word, at: 0)
+            score += word.count
         }
         newWord = ""
     }
     func startGame() {
+        score = 0
+        usedWords.removeAll()
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
             if let startWordsString = try? String(contentsOf: startWordsURL) {
                 let startWords = startWordsString.components(separatedBy: "\n")
