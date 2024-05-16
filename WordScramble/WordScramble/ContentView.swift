@@ -42,6 +42,14 @@ struct ContentView: View {
     func addWord() {
         let word = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         guard word.count > 0 else { return }
+        guard isNotRootWord(word: word) else {
+            wordError(title: "Root word is not possible", message: "Use another word")
+            return
+        }
+        guard isLonggerThan3(word: word) else {
+            wordError(title: "Word is too short", message: "Input the word longer than 3")
+            return
+        }
         guard isOriginal(word: word) else {
             wordError(title: "Word used already", message: "Use another original word")
             return
@@ -68,6 +76,12 @@ struct ContentView: View {
             }
         }
         fatalError("Could not load start.txt from bundle.")
+    }
+    func isNotRootWord(word: String) -> Bool {
+        !(rootWord == word)
+    }
+    func isLonggerThan3(word: String) -> Bool {
+        word.count > 3
     }
     func isOriginal(word: String) -> Bool {
         !usedWords.contains(word)
