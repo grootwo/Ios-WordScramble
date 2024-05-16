@@ -36,6 +36,13 @@ struct ContentView: View {
             .alert(errorTitle, isPresented: $showingAlert) { } message: {
                 Text(errorMessage)
             }
+            .toolbar {
+                Button(action: {
+                    startGame()
+                }, label: {
+                    Text("New Word")
+                })
+            }
         }
     }
     
